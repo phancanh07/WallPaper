@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Photo {
-
     @SerializedName("id")
     @Expose
     private String id;
@@ -70,7 +69,16 @@ public class Photo {
     private Integer iconfarm;
     @SerializedName("views")
     @Expose
-    private String views;
+    private int views;
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
     @SerializedName("tags")
     @Expose
     private String tags;
@@ -384,13 +392,9 @@ public class Photo {
         this.iconfarm = iconfarm;
     }
 
-    public String getViews() {
-        return views;
-    }
 
-    public void setViews(String views) {
-        this.views = views;
-    }
+
+
 
     public String getTags() {
         return tags;

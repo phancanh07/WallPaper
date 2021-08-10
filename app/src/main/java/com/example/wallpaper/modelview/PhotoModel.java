@@ -3,28 +3,31 @@ package com.example.wallpaper.modelview;
 import android.widget.ProgressBar;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.wallpaper.model.Photo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoModel extends ViewModel {
-    private PhotoResponse response;
-    private LiveData<List<Photo>> liveData;
-
+    private MutableLiveData<List<Photo>> mutableLiveData;
+    private List<Photo> list;
 
     public PhotoModel() {
-        response = new PhotoResponse();
-        liveData = response.getLiveData();
-
+        mutableLiveData = new MutableLiveData<>();
+        list = new ArrayList<>();
+        mutableLiveData.postValue(list);
     }
 
-    public void getPhoto(int page, ProgressBar progressBar) {
-        response.getAllPhoto(page, progressBar);
+    public MutableLiveData<List<Photo>> getMutableLiveData() {
+        return mutableLiveData;
     }
 
-    public LiveData<List<Photo>> getLiveData() {
-        return liveData;
+    public void setList(List<Photo> list1) {
+        list.addAll(list1);
+        mutableLiveData.postValue(list);
     }
 }
